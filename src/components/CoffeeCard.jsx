@@ -67,7 +67,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
                                 <span className="font-bold text-gray-800">Name:</span> {name}
                             </p>
                             <p className="text-sm sm:text-base text-gray-600">
-                                <span className="font-bold text-gray-800">Chef:</span> {taste}
+                                <span className="font-bold text-gray-800">Taste:</span> {taste}
                             </p>
                             <p className="text-sm sm:text-base text-gray-600">
                                 <span className="font-bold text-gray-800">Price:</span> {price} Taka

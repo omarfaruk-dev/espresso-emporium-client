@@ -39,7 +39,7 @@ const AddCoffee = () => {
     return (
         <div className="bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: "url('https://i.ibb.co/Q70XtmLB/bg-flower.png')" }}>
-            <div className="max-w-6xl mx-auto py-12 px-4">
+            <div className="max-w-7xl mx-auto py-12 px-4">
                 <Link to="/" className="text-primary font-semibold inline-flex items-center mb-6 p-2 hover:text-secondary">
                     <FaArrowLeftLong className="text-gray-700" />
                     <span className="ml-2 rancho-font text-2xl text-gray-700 text-shadow-secondary hover:text-primary hover:underline">Back to home</span>
