@@ -2,10 +2,11 @@
 import { Link, useLoaderData } from 'react-router';
 import CoffeeCard from './CoffeeCard';
 import { BsCup } from 'react-icons/bs';
+import { useState } from 'react';
 
 const Home = () => {
-    const coffees = useLoaderData();
-    console.log(coffees);
+    const initialCoffees = useLoaderData();
+    const [coffees, setCoffees] = useState(initialCoffees);
     return (
         <div className="bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: "url('https://i.ibb.co/8gx8kWjF/bg-home.png')" }}>
@@ -26,7 +27,12 @@ const Home = () => {
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                     {
 
-                        coffees.map(coffee => <CoffeeCard key={coffee._id} coffee={coffee}></CoffeeCard>)
+                        coffees.map(coffee =>
+                            <CoffeeCard key={coffee._id}
+                                coffee={coffee}
+                                setCoffees={setCoffees}
+                                coffees={coffees}
+                            ></CoffeeCard>)
                     }
                 </div>
             </div>

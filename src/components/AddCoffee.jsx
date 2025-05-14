@@ -42,10 +42,10 @@ const AddCoffee = () => {
             <div className="max-w-6xl mx-auto py-12 px-4">
                 <Link to="/" className="text-primary font-semibold inline-flex items-center mb-6 p-2 hover:text-secondary">
                     <FaArrowLeftLong className="text-gray-700" />
-                    <span className="ml-2 rancho-font text-3xl text-gray-700 text-shadow-secondary hover:text-primary hover:underline">Back to home</span>
+                    <span className="ml-2 rancho-font text-2xl text-gray-700 text-shadow-secondary hover:text-primary hover:underline">Back to home</span>
                 </Link>
 
-                <div className="bg-accent p-10 rounded-md shadow-md border border-secondary">
+                <div className="bg-accent px-20 py-16 rounded-md shadow-md border border-secondary">
                     <h2 className="text-5xl text-gray-700 text-shadow-secondary rancho-font font-bold text-center mb-4 leading-10">Add New Coffee</h2>
                     <p className="text-center text-lg text-gray-600 max-w-4xl mx-auto mb-10">
                         It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
