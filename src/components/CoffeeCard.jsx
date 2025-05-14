@@ -1,11 +1,47 @@
-import React from 'react';
 import { BsEye } from 'react-icons/bs';
-import { FaEdit } from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa6';
 import { FiEdit } from 'react-icons/fi';
+import Swal from 'sweetalert2';
 
-const CoffeeCard = ({coffee}) => {
-    const {name, photo, price, taste} = coffee;
+
+const CoffeeCard = ({ coffee }) => {
+    const { _id, name, photo, price, taste } = coffee;
+
+
+    const handleDelete = (_id) => {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#331A15', // your primary color
+        cancelButtonColor: '#D2B48C',  // your secondary color
+        confirmButtonText: 'Yes, delete it!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`http://localhost:3000/coffees/${_id}`, {
+            method: 'DELETE',
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.deletedCount) {
+                Swal.fire(
+                  'Deleted!',
+                  'Your coffee has been deleted.',
+                  'success'
+                );
+              }
+            })
+            // .catch((err) => {
+            //   Swal.fire(
+            //     'Error!',
+            //     'Something went wrong while deleting.',
+            //     'error'
+            //   );
+            // });
+        }
+      });
+    };
 
     return (
         <div>
@@ -16,7 +52,6 @@ const CoffeeCard = ({coffee}) => {
                         <img
                             className="h-36 w-28 sm:h-48 sm:w-36 object-contain" // object-contain is better for mockups
                             src={photo}
-                            alt={name}
                         />
                     </div>
 
@@ -38,19 +73,19 @@ const CoffeeCard = ({coffee}) => {
                     {/* Icons Section */}
                     <div className="flex flex-col space-y-2 sm:space-y-3">
                         <button
-                            
+
                             className="p-2 sm:p-2.5 bg-secondary hover:bg-[#c9b695] text-white rounded-md transition-colors"
                         >
                             <BsEye size={18} className="sm:w-5 sm:h-5" />
                         </button>
                         <button
-                            
+
                             className="p-2 sm:p-2.5 bg-[#4A4A4A] hover:bg-[#3A3A3A] text-white rounded-md transition-colors"
                         >
                             <FiEdit size={18} className="sm:w-5 sm:h-5" />
                         </button>
                         <button
-                            
+                            onClick={() => handleDelete(_id)}
                             className="p-2 sm:p-2.5 bg-[#EA5252] hover:bg-[#d04242] text-white rounded-md transition-colors"
                         >
                             <FaTrash size={18} className="sm:w-5 sm:h-5" />
