@@ -37,9 +37,6 @@ const ViewContacts = () => {
                             // Remove the deleted contact from the state
                             const remainingContacts = contacts.filter(contact => contact._id !== id)
                             setContacts(remainingContacts);
-
-                            // const remainingCoffees = coffees.filter(coffee => coffee._id !== _id);
-                            // setCoffees(remainingCoffees);
                         }
                     })
             }
@@ -69,7 +66,7 @@ const ViewContacts = () => {
                                 <td>{contact.message}</td>
                                 <td><button
                                     onClick={() => handleDelete(contact._id)}
-                                    className="p-2 sm:p-2.5 bg-[#EA5252] hover:bg-[#d04242] text-white rounded-md transition-colors"
+                                    className="p-2 sm:p-2.5 bg-red-400 hover:bg-red-500 text-white rounded-md transition-colors"
                                 >
                                     <FaTrash size={18} className="sm:w-5 sm:h-5" />
                                 </button></td>

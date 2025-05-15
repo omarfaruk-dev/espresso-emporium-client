@@ -1,7 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
 
 import { createBrowserRouter, RouterProvider, } from "react-router";
 import MainLayout from './layouts/MainLayout.jsx';
@@ -9,6 +8,9 @@ import Home from './components/Home.jsx';
 import AddCoffee from './components/AddCoffee.jsx';
 import UpdateCoffee from './components/UpdateCoffee.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import SignUp from './pages/user/SignUp.jsx';
+import SignIn from './pages/user/SignIn.jsx';
+import AuthProvider from './context/AuthProvider.jsx';
 
 const router = createBrowserRouter([
   {
@@ -26,12 +28,21 @@ const router = createBrowserRouter([
       },
       {
         path: 'update-coffee/:id',
-        loader: ({params}) => fetch(`http://localhost:3000/coffees/${params.id}`),
+        loader: ({ params }) => fetch(`http://localhost:3000/coffees/${params.id}`),
         Component: UpdateCoffee,
       },
       {
+        path: 'signup',
+        Component: SignUp,
+      },
+      {
+        path: 'signin',
+        Component: SignIn,
+      },
+
+      {
         path: 'dashboard',
-        loader: ()=> fetch('http://localhost:3000/contact'),
+        loader: () => fetch('http://localhost:3000/contact'),
         Component: Dashboard,
       }
     ]
@@ -40,6 +51,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <AuthProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </AuthProvider>
   </StrictMode>,
 )
