@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import SignUp from './pages/user/SignUp.jsx';
 import SignIn from './pages/user/SignIn.jsx';
 import AuthProvider from './context/AuthProvider.jsx';
+import Users from './pages/user/Users.jsx';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
       {
         path: 'signin',
         Component: SignIn,
+      },
+      {
+        path: 'users',
+        loader: ()=> fetch('http://localhost:3000/users'),
+        Component: Users,
       },
 
       {

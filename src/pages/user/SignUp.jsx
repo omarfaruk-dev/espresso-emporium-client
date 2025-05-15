@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 const SignUp = () => {
 
     const { createUser } = use(AuthContext);
-    console.log(createUser);
+    // console.log(createUser);
 
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
@@ -34,16 +34,20 @@ const SignUp = () => {
 
         const form = e.target;
         const formData = new FormData(form);
-        const { email, password, ...userProfile } = Object.fromEntries(formData.entries());
+        const { email, password, ...restFormData } = Object.fromEntries(formData.entries());
 
-
-        console.log(email, password, userProfile);
 
         //create user in the firebase
         createUser(email, password)
             .then((userCredential) => {
                 const currentUser = userCredential.user;
                 console.log(currentUser);
+
+                const userProfile ={ email, ...restFormData, 
+                    creationTime: currentUser?.metadata?.creationTime,
+                    lastSignInTime: currentUser?.metadata?.lastSignInTime,
+                }
+
                 //save user info in the database
                 fetch('http://localhost:3000/users', {
                     method: 'POST',
@@ -221,7 +225,7 @@ const SignUp = () => {
                     {/* Google Sign-in */}
                     <div className="flex justify-center my-4">
                         <button
-                            onClick=''
+                            
                             type="button"
                             className="flex items-center justify-center w-full py-2 border-2 border-primary bg-white rounded-lg focus:ring-2 focus:ring-offset-1 focus:ring-secondary cursor-pointer"
                         >
