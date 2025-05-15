@@ -53,6 +53,7 @@ const handleContact = (e) => {
                     showConfirmButton: false,
                     timer: 2000
                 });
+                form.reset()
             } else {
                 Swal.fire({
                     confirmButtonColor: '#D2B48C',

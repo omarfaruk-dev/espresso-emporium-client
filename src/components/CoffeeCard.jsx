@@ -37,13 +37,6 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
                             setCoffees(remainingCoffees);
                         }
                     })
-                // .catch((err) => {
-                //   Swal.fire(
-                //     'Error!',
-                //     'Something went wrong while deleting.',
-                //     'error'
-                //   );
-                // });
             }
         });
     };
