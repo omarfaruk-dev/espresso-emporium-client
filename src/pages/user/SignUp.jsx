@@ -5,6 +5,7 @@ import { FcGoogle } from 'react-icons/fc';
 import toast from 'react-hot-toast';
 import bgImg from '../../assets/images/bg-flower.png';
 import { AuthContext } from '../../context/AuthContext';
+import Swal from 'sweetalert2';
 
 
 const SignUp = () => {
@@ -33,14 +34,37 @@ const SignUp = () => {
 
         const form = e.target;
         const formData = new FormData(form);
-        const email = formData.get('email');
-        console.log(email);
+        const { email, password, ...userProfile } = Object.fromEntries(formData.entries());
+
+
+        console.log(email, password, userProfile);
 
         //create user in the firebase
         createUser(email, password)
             .then((userCredential) => {
                 const currentUser = userCredential.user;
                 console.log(currentUser);
+                //save user info in the database
+                fetch('http://localhost:3000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(userProfile)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.insertedId) {
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: "Profile Created successfully!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                        console.log('After profile save on DB', data);
+                    })
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -64,16 +88,6 @@ const SignUp = () => {
 
 
     };
-
-    // const handleSignUp = (e) => {
-    //     e.preventDefault();
-    //     const form = e.target;
-    //     const formData = new FormData(form);
-    //     const email = formData.get('email');
-    //     console.log(email);
-
-
-    // }
 
     return (
         <div className="py-10 min-h-screen flex items-center justify-center px-4" style={{
@@ -124,6 +138,26 @@ const SignUp = () => {
                             type="text"
                             className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-secondary"
                             placeholder="Enter your photo URL"
+                        />
+                    </div>
+                    {/* Phone No */}
+                    <div>
+                        <label className="block text-sm font-semibold text-primary mb-1">Phone Number</label>
+                        <input
+                            name="phone"
+                            type="text"
+                            className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-secondary"
+                            placeholder="Enter your phone number"
+                        />
+                    </div>
+                    {/* Address */}
+                    <div>
+                        <label className="block text-sm font-semibold text-primary mb-1">Address</label>
+                        <input
+                            name="address"
+                            type="text"
+                            className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-secondary"
+                            placeholder="Enter your address"
                         />
                     </div>
 
