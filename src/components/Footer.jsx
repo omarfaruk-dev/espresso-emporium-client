@@ -19,28 +19,51 @@ const handleContact = (e) => {
     const name = form.name.value;
     const email = form.email.value;
     const message = form.message.value;
-    console.log(name, email, message);
-    if (name && email && message) {
-        Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Your Message has been sent successfully!",
-            text: "We will get back to you soon.",
-            showConfirmButton: false,
-            timer: 2000
-        });
-    }
 
-    if (!name || !email || !message) {
+      if (!name || !email || !message) {
         Swal.fire({
-            confirmButtonColor: '#D2B48C',
             icon: "error",
             title: "Oops...",
             text: "Please fill in all the fields.",
+            confirmButtonColor: '#D2B48C'
         });
         return;
     }
-    // form.reset();
+
+    const contactData = { name, email, message };
+    console.log(contactData);
+
+    //send data to server / db
+    fetch('http://localhost:3000/contact', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(contactData)
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            if (data.insertedId) {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Your Message has been sent successfully!",
+                    text: "We will get back to you soon.",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            } else {
+                Swal.fire({
+                    confirmButtonColor: '#D2B48C',
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Please fill in all the fields.",
+                });
+                return;
+            }
+        })
+
 }
 
 const Footer = () => {

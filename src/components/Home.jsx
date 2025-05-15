@@ -9,9 +9,6 @@ const Home = () => {
             <section>
                 <CoffeeContainer />
             </section>
-            <section>
-                <Footer />
-            </section>
         </>
     );
 };
