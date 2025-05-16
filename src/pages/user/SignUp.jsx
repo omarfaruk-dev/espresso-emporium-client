@@ -11,7 +11,6 @@ import Swal from 'sweetalert2';
 const SignUp = () => {
 
     const { createUser } = use(AuthContext);
-    // console.log(createUser);
 
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
@@ -41,7 +40,6 @@ const SignUp = () => {
         createUser(email, password)
             .then((userCredential) => {
                 const currentUser = userCredential.user;
-                console.log(currentUser);
 
                 const userProfile ={ email, ...restFormData, 
                      uid: currentUser.uid,
@@ -68,7 +66,6 @@ const SignUp = () => {
                                 timer: 1500
                             });
                         }
-                        console.log('After profile save on DB', data);
                     })
             })
             .catch((error) => {

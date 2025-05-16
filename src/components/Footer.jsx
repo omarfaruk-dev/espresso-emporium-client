@@ -31,7 +31,6 @@ const handleContact = (e) => {
     }
 
     const contactData = { name, email, message };
-    console.log(contactData);
 
     //send data to server / db
     fetch('http://localhost:3000/contact', {
@@ -43,7 +42,6 @@ const handleContact = (e) => {
     })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             if (data.insertedId) {
                 Swal.fire({
                     position: "center",

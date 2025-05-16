@@ -10,41 +10,6 @@ const Users = () => {
     // const { deleteSingleUser } = use(AuthContext);
     const initialUsers = useLoaderData();
     const [users, setUsers] = useState(initialUsers);
-    console.log(users);
-
-    // const handleDelete = (id) => {
-    //     Swal.fire({
-    //         title: 'Are you sure?',
-    //         text: "You won't be able to revert this!",
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#331A15', // your primary color
-    //         cancelButtonColor: '#D2B48C',  // your secondary color
-    //         confirmButtonText: 'Yes, delete it!',
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             fetch(`http://localhost:3000/users/${id}`, {
-    //                 method: 'DELETE',
-    //             })
-    //                 .then((res) => res.json())
-    //                 .then((data) => {
-    //                     console.log(data.deletedCount);
-    //                     //also delete from firebase
-    //                     deleteSingleUser();
-    //                     if (data.deletedCount) {
-    //                         Swal.fire(
-    //                             'Deleted!',
-    //                             'User has been deleted.',
-    //                             'success',
-    //                         );
-    //                         // Remove the deleted contact from the state
-    //                         const remainingUsers = users.filter(user => user._id !== id)
-    //                         setUsers(remainingUsers);
-    //                     }
-    //                 })
-    //         }
-    //     });
-    // };
 
     const handleDelete = (id) => { //firebaseUid
     Swal.fire({
@@ -64,13 +29,6 @@ const Users = () => {
                 .then((res) => res.json())
                 .then((data) => {
                     if (data.deletedCount) {
-                        // 2️⃣ Step 2: Delete from Firebase Auth (admin)
-                        // fetch(`http://localhost:3000/admin/delete-firebase-user/${encodeURIComponent(firebaseUid)}`, {
-                        //     method: 'DELETE',
-                        // })
-                        //     .then(res => res.json())
-                        //     .then(data => {
-                                // console.log('Firebase user deleted:', data);
                                 Swal.fire(
                                     'Deleted!',
                                     'User has been deleted.',
@@ -79,10 +37,6 @@ const Users = () => {
                                 //delete from state and update
                                 const remainingUsers = users.filter(user => user._id !== id)
                                 setUsers(remainingUsers);
-                            // })
-                            // .catch(err => {
-                            //     console.error('Error deleting Firebase user:', err);
-                            // });
                     }
                 });
         }

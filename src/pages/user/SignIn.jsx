@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import bgImage from '../../assets/images/bg-flower.png'; // Replace with your actual image path
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from "../../context/AuthContext";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
 
@@ -20,11 +21,9 @@ const SignIn = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
         signInUser(email, password)
             .then((userCredential) => {
                 const currentUser = userCredential.user;
-                console.log(currentUser);
                 const signInInfo = {
                     email, lastSignInTime: currentUser?.metadata?.lastSignInTime
                 }
@@ -36,11 +35,19 @@ const SignIn = () => {
                     },
                     body: JSON.stringify(signInInfo),
                 })
-                .then(res => res.json())
-                .then(data =>{
-                    console.log('After patch update:', data);
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.matchedCount) {
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: "SignIn successfully!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
 
-                })
+                    })
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -118,7 +125,7 @@ const SignIn = () => {
                     <div className="flex justify-center">
                         <button
                             type="button"
-                            onClick={() => console.log('Google login')}
+                            
                             className="flex items-center justify-center w-full py-2 space-x-3 border-2 border-[#331A15] bg-white rounded-xl focus:ring-2 focus:ring-offset-1 focus:ring-secondary"
                         >
                             <FcGoogle size={22} />

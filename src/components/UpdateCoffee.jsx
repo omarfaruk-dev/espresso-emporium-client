@@ -24,7 +24,6 @@ const UpdateCoffee = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log('after updating coffee', data);
                 if (data.modifiedCount) {
                     Swal.fire({
                         position: "center",
