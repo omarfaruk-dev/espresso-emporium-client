@@ -33,7 +33,7 @@ const handleContact = (e) => {
     const contactData = { name, email, message };
 
     //send data to server / db
-    fetch('http://localhost:3000/contact', {
+    fetch('https://espresso-emporium-server-alpha.vercel.app/contact', {
         method: 'POST',
         headers: {
             'content-type': 'application/json'

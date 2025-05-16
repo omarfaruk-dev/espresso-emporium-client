@@ -28,7 +28,7 @@ const SignIn = () => {
                     email, lastSignInTime: currentUser?.metadata?.lastSignInTime
                 }
                 // update last signIn to db
-                fetch('http://localhost:3000/users', {
+                fetch('https://espresso-emporium-server-alpha.vercel.app/users', {
                     method: 'PATCH',
                     headers: {
                         'content-type': 'application/json',

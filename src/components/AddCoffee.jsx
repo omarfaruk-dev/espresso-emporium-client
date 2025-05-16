@@ -13,7 +13,7 @@ const AddCoffee = () => {
         const newCoffee = Object.fromEntries(formData.entries());
 
         //send data to db
-        fetch('http://localhost:3000/coffees', {
+        fetch('https://espresso-emporium-server-alpha.vercel.app/coffees', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -22,13 +22,16 @@ const AddCoffee = () => {
         })
             .then(res => res.json())
             .then(data => {
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Coffee added successfully!",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                if (data.insertedId) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Coffee added successfully!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+
             })
 
     }

@@ -23,7 +23,7 @@ const Users = () => {
     }).then((result) => {
         if (result.isConfirmed) {
             // 1️⃣ Step 1: Delete from MongoDB
-            fetch(`http://localhost:3000/users/${id}`, {
+            fetch(`https://espresso-emporium-server-alpha.vercel.app/users/${id}`, {
                 method: 'DELETE',
             })
                 .then((res) => res.json())
