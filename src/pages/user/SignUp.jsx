@@ -44,6 +44,7 @@ const SignUp = () => {
                 console.log(currentUser);
 
                 const userProfile ={ email, ...restFormData, 
+                     uid: currentUser.uid,
                     creationTime: currentUser?.metadata?.creationTime,
                     lastSignInTime: currentUser?.metadata?.lastSignInTime,
                 }

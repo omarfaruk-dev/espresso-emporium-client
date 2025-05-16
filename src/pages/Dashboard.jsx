@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaPlusCircle, FaEnvelopeOpenText, FaEdit } from "react-icons/fa";
 import ViewContacts from "./ViewContacts";
 import AddCoffee from "../components/AddCoffee";
+import Users from "./user/Users";
 
 const Dashboard = () => {
   const [activePage, setActivePage] = useState("add-coffee");
@@ -36,6 +37,15 @@ const Dashboard = () => {
 
           <li
             className={`flex items-center gap-2 cursor-pointer ${
+              activePage === "users" && "text-secondary"
+            }`}
+            onClick={() => setActivePage("users")}
+          >
+            <FaEnvelopeOpenText />
+            Users
+          </li>
+          <li
+            className={`flex items-center gap-2 cursor-pointer ${
               activePage === "view-contacts" && "text-secondary"
             }`}
             onClick={() => setActivePage("view-contacts")}
@@ -51,6 +61,7 @@ const Dashboard = () => {
         {activePage === "add-coffee" && <AddCoffee />}
         {activePage === "manage-coffee" && <h2>Manage Coffee</h2>}
         {activePage === "view-contacts" && <ViewContacts />}
+        {activePage === "users" && <Users/>}
 
       </main>
     </div>

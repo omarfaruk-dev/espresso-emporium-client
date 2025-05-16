@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router";
 import bgImage from '../../assets/images/bg-flower.png'; // Replace with your actual image path
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { AuthContext } from "../../context/AuthContext";
 
 const SignIn = () => {
+
+    const { signInUser } = use(AuthContext);
+
     // const [email, setEmail] = useState('');
     // const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +17,20 @@ const SignIn = () => {
 
     const handleSignIn = (e) => {
         e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+        signInUser(email, password)
+            .then((userCredential) => {
+                const currentUser = userCredential.user;
+                console.log(currentUser);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.error('Error signin user:', errorCode, errorMessage);
+            });
     };
 
     return (
@@ -60,7 +78,7 @@ const SignIn = () => {
                                 className="absolute inset-y-0 right-3 flex items-center text-primary cursor-pointer"
                                 onClick={togglePassword}
                             >
-                                {showPassword ? <FaEyeSlash className="text-secondary"/> : <FaEye />}
+                                {showPassword ? <FaEyeSlash className="text-secondary" /> : <FaEye />}
                             </span>
                         </div>
                     </div>
