@@ -1,16 +1,24 @@
+import { use } from 'react';
 import { BsEye } from 'react-icons/bs';
 import { FaTrash } from 'react-icons/fa6';
 import { FiEdit } from 'react-icons/fi';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../context/AuthContext';
 
 
 const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
     const { _id, name, photo, price, taste } = coffee;
 
+    const { user } = use(AuthContext);
+    const navigate = useNavigate();
 
 
     const handleDelete = (_id) => {
+        if (!user) {
+            return navigate('/signin')
+        }
+
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -70,7 +78,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
 
                     {/* Icons Section */}
                     <div className="flex flex-col space-y-2 sm:space-y-3">
-                        <Link to={`/coffee/${_id}`}>
+                        <Link to={`/coffee-details/${_id}`}>
                             <button
 
                                 className="p-2 sm:p-2.5 bg-secondary hover:bg-[#c9b695] text-white rounded-md transition-colors"

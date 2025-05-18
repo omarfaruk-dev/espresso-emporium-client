@@ -12,6 +12,8 @@ import SignUp from './pages/user/SignUp.jsx';
 import SignIn from './pages/user/SignIn.jsx';
 import AuthProvider from './context/AuthProvider.jsx';
 import Users from './pages/user/Users.jsx';
+import PrivateRoute from './routes/PrivateRoute.jsx';
+import CoffeeDetails from './components/CoffeeDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,12 +27,24 @@ const router = createBrowserRouter([
       },
       {
         path: "add-coffee",
-        Component: AddCoffee,
+        element:
+          <PrivateRoute>
+            <AddCoffee />
+          </PrivateRoute>
+      },
+      {
+        path: 'coffee-details/:id',
+        loader: ({ params }) => fetch(`https://espresso-emporium-server-alpha.vercel.app/coffees/${params.id}`),
+        element:
+          <CoffeeDetails />
       },
       {
         path: 'update-coffee/:id',
         loader: ({ params }) => fetch(`https://espresso-emporium-server-alpha.vercel.app/coffees/${params.id}`),
-        Component: UpdateCoffee,
+        element:
+          <PrivateRoute>
+            <UpdateCoffee />
+          </PrivateRoute>
       },
       {
         path: 'signup',
@@ -42,14 +56,21 @@ const router = createBrowserRouter([
       },
       {
         path: 'users',
-        loader: ()=> fetch('https://espresso-emporium-server-alpha.vercel.app/users'),
-        Component: Users,
+        loader: () => fetch('https://espresso-emporium-server-alpha.vercel.app/users'),
+        element:
+          <PrivateRoute>
+            <Users />
+          </PrivateRoute>
+
       },
 
       {
         path: 'dashboard',
         loader: () => fetch('https://espresso-emporium-server-alpha.vercel.app/contact'),
-        Component: Dashboard,
+        element:
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
       }
     ]
   }

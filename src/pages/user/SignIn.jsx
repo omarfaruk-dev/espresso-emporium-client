@@ -1,6 +1,6 @@
 import { use, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import bgImage from '../../assets/images/bg-flower.png'; // Replace with your actual image path
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from "../../context/AuthContext";
@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 const SignIn = () => {
 
     const { signInUser } = use(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     // const [email, setEmail] = useState('');
     // const [password, setPassword] = useState('');
@@ -27,6 +29,7 @@ const SignIn = () => {
                 const signInInfo = {
                     email, lastSignInTime: currentUser?.metadata?.lastSignInTime
                 }
+                navigate(`${location.state ? location.state : '/'}`)
                 // update last signIn to db
                 fetch('https://espresso-emporium-server-alpha.vercel.app/users', {
                     method: 'PATCH',

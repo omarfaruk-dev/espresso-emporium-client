@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaArrowLeftLong } from 'react-icons/fa6';
+import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6';
 import { Link, useLoaderData } from 'react-router';
 import Swal from 'sweetalert2';
 
@@ -41,11 +41,16 @@ const UpdateCoffee = () => {
         <div className="bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: "url('https://i.ibb.co/Q70XtmLB/bg-flower.png')" }}>
             <div className="max-w-7xl mx-auto py-12 px-4">
-                <Link to="/" className="text-primary font-semibold inline-flex items-center mb-6 p-2 hover:text-secondary">
-                    <FaArrowLeftLong className="text-gray-700" />
-                    <span className="ml-2 rancho-font text-2xl text-gray-700 text-shadow-secondary hover:text-primary hover:underline">Back to home</span>
-                </Link>
-
+                <div className='flex md:justify-between flex-wrap justify-center'>
+                    <Link to="/" className="text-primary font-semibold inline-flex items-center mb-6 p-2 hover:text-secondary">
+                        <FaArrowLeftLong className="text-gray-700" />
+                        <span className="ml-2 rancho-font text-2xl text-gray-700 text-shadow-secondary hover:text-primary hover:underline">Back to home</span>
+                    </Link>
+                    <Link to={`/coffee-details/${_id}`} className="text-primary font-semibold inline-flex items-center mb-6 p-2 hover:text-secondary">
+                        <span className="mr-2 rancho-font text-2xl text-gray-700 text-shadow-secondary hover:text-primary hover:underline">View Updated Coffee</span>
+                        <FaArrowRightLong className="text-gray-700" />
+                    </Link>
+                </div>
                 <div className="bg-accent px-20 py-16 rounded-md shadow-md border border-secondary">
                     <h2 className="text-5xl text-gray-700 text-shadow-secondary rancho-font font-bold text-center mb-4 leading-10">Update Existing Coffee Details</h2>
                     <p className="text-center text-lg text-gray-600 max-w-4xl mx-auto mb-10">
