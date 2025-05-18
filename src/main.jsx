@@ -14,6 +14,7 @@ import AuthProvider from './context/AuthProvider.jsx';
 import Users from './pages/user/Users.jsx';
 import PrivateRoute from './routes/PrivateRoute.jsx';
 import CoffeeDetails from './components/CoffeeDetails.jsx';
+import ErrorPage from './pages/ErrorPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,9 @@ const router = createBrowserRouter([
         path: 'coffee-details/:id',
         loader: ({ params }) => fetch(`https://espresso-emporium-server-alpha.vercel.app/coffees/${params.id}`),
         element:
-          <CoffeeDetails />
+          <PrivateRoute>
+            <CoffeeDetails />
+          </PrivateRoute>
       },
       {
         path: 'update-coffee/:id',
@@ -71,6 +74,10 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <Dashboard />
           </PrivateRoute>
+      },
+      {
+        path: '*',
+        Component: ErrorPage,
       }
     ]
   }

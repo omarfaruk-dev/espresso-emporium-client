@@ -87,8 +87,6 @@ const SignUp = () => {
             setShowValidation(true); // force the UI to show validation
             return;
         }
-
-
     };
 
     return (

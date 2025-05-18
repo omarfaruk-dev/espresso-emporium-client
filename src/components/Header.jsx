@@ -1,10 +1,10 @@
 import React from 'react';
+import SmallNav from './SmallNav';
 
 const Header = () => {
     return (
         <div>
-            
-        Header
+            <SmallNav/>
         </div>
     );
 };
