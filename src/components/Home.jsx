@@ -1,5 +1,6 @@
 import CoffeeContainer from "./CoffeeContainer";
 import Footer from "./Footer";
+import InstagramFeatures from "./InstagramFeatures";
 
 const Home = () => {
     // const initialCoffees = useLoaderData();
@@ -8,6 +9,9 @@ const Home = () => {
         <>
             <section>
                 <CoffeeContainer />
+            </section>
+            <section>
+                <InstagramFeatures/>
             </section>
         </>
     );

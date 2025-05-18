@@ -1,5 +1,6 @@
 import { Link, useRouteError } from 'react-router';
 import Button from '../components/ui/Button';
+import errorImg from '../assets/images/404.gif'
 
 const ErrorPage = () => {
 
@@ -7,11 +8,11 @@ const ErrorPage = () => {
     return (
         <div>
             <title>404 Not Found</title>
-            <div className="min-h-[calc(100vh-85px)] flex flex-col items-center justify-center bg-white px-4 py-12">
+            <div className="min-h-[calc(100vh-150px)] flex flex-col items-center justify-center bg-white px-4 py-12">
                 <img
-                    src="https://i.ibb.co.com/pB3FY9n6/404-error.jpg"
+                    src={errorImg}
                     alt="Not Found"
-                    className="w-100 rounded-xl mb-5 shadow hover:shadow-lg duration-700 transform hover:-translate-y-1"
+                    className="w-150 rounded-xl mb-5 shadow hover:shadow-lg duration-700 transform hover:-translate-y-1"
                 />
                 <h2 className="text-2xl font-semibold text-gray-800 mb-2">Oops! {error?.error?.message || 'Something went wrong!'}</h2>
                 <p className="text-gray-600 text-center max-w-md mb-6">
